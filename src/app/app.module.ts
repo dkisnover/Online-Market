@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { InventoryListComponent } from './inventory-list/inventory-list.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { CustomHeaderComponent } from './custom-header/custom-header.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -16,9 +17,11 @@ import { CustomHeaderComponent } from './custom-header/custom-header.component';
   ],
   imports: [
     BrowserModule,
+    RouterModule,
     AppRoutingModule
   ],
   providers: [],
+  exports: [AppRoutingModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
