@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../product.model';
 import { InventoryService } from './Inventory.service';
 
@@ -11,10 +12,17 @@ import { InventoryService } from './Inventory.service';
 export class InventoryListComponent implements OnInit {
   products: Product[];
 
-  constructor(private inventoryService: InventoryService) { }
+  constructor(private inventoryService: InventoryService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.products = this.inventoryService.getProducts();
+  }
+
+  onAddActivate(){
+    console.log("hello");
+    this.router.navigate(['add'], {relativeTo: this.route});
   }
 
 }

@@ -7,13 +7,19 @@ import { InventoryListComponent } from './inventory-list/inventory-list.componen
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { CustomHeaderComponent } from './custom-header/custom-header.component';
 import { RouterModule } from '@angular/router';
+import { ReceiptTrackerComponent } from './receipt-tracker/receipt-tracker.component';
+import { ReceiptDisplayComponent } from './receipt-tracker/receipt-display/receipt-display.component';
+import { InventoryAddComponent } from './inventory-list/inventory-add/inventory-add.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InventoryListComponent,
     ShoppingCartComponent,
-    CustomHeaderComponent
+    CustomHeaderComponent,
+    ReceiptTrackerComponent,
+    ReceiptDisplayComponent,
+    InventoryAddComponent
   ],
   imports: [
     BrowserModule,

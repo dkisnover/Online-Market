@@ -1,4 +1,4 @@
-<p>hello</p>
+<h3>Inventory</h3>
 <table class="table">
     <thead>
       <tr>
@@ -19,4 +19,7 @@
         <td *ngIf="product.imported === false">no</td>
       </tr>
     </tbody>
+    <button type="button" class="btn btn-success" (click)="onAddActivate()">Add</button>
+
   </table>
+  <router-outlet></router-outlet>
