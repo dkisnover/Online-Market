@@ -5,9 +5,9 @@ import { InventoryListComponent } from './inventory-list/inventory-list.componen
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/inventory', pathMatch: 'full' },
-  { path: 'cart', component: ShoppingCartComponent },
-  { path: 'inventory', component: InventoryListComponent },
+  { path: '', redirectTo: '/inventory-list', pathMatch: 'full' },
+  { path: 'shopping-cart', component: ShoppingCartComponent },
+  { path: 'inventory-list', component: InventoryListComponent },
 ];
 
 @NgModule({
