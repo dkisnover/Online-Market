@@ -2,15 +2,15 @@
     <div class="form-row align-items-center">
       <div class="col-auto">
         <label class="sr-only" for="inlineFormInput">Name</label>
-        <input type="text" class="form-control mb-2" id="name" placeholder="Apples">
+        <input type="text" class="form-control mb-2" id="name" ngModel name="name" placeholder="Apples">
       </div>
       <div class="col-auto">
         <label class="sr-only" for="inlineFormInput">price</label>
-        <input type="number" min="0" step="any" class="form-control mb-2" id="price" placeholder="10.99">
+        <input type="number" min="0" step="any" class="form-control mb-2" id="price" ngModel name="price" placeholder="10.99">
       </div>
       <div class="col-auto">
         <div class="form-check mb-2">
-          <input class="form-check-input" type="checkbox" id="imported">
+          <input class="form-check-input" type="checkbox" ngModel name="imported" id="imported">
           <label class="form-check-label" for="autoSizingCheck">
             imported
           </label>
@@ -18,7 +18,7 @@
       </div>
       <div class="col-auto">
         <div class="form-check mb-2">
-          <input class="form-check-input" type="checkbox" id="exempt">
+          <input class="form-check-input" type="checkbox" id="exempt" ngModel name="exempt">
           <label class="form-check-label" for="autoSizingCheck">
             tax exempt
           </label>

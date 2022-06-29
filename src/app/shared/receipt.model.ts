@@ -11,7 +11,7 @@ export class Receipt{
         this.purchaseDate = purchaseDate;
         this.totalCost = 0;
         for(var product of this.purchases){
-            this.totalCost += product.totalPrice;
+        this.totalCost += product.totalPrice;
         }
         this.index = index;
     }

@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable} from 'rxjs';
 import { Product } from '../shared/product.model';
+import { CartService } from '../shared/cart.service';
 import { InventoryService } from './Inventory.service';
 
 @Component({
@@ -17,7 +18,8 @@ export class InventoryListComponent implements OnInit {
 
   constructor(private inventoryService: InventoryService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private cartService: CartService) { }
 
   ngOnInit(): void {
     //this.products$ = new Observable<Product[]>( productList => {this.inventoryService.getProducts()} );
@@ -25,13 +27,15 @@ export class InventoryListComponent implements OnInit {
   }
 
   reloadInventory(){
-    this.products$ = this.inventoryService.getProducts();
-    console.log(this.products$);
+    this.trial = this.inventoryService.getProducts();
   }
 
   onAddActivate(){
     console.log("hello");
     this.router.navigate(['add'], {relativeTo: this.route});
+  }
+
+  onAddToCart(index: number){
   }
 
 }

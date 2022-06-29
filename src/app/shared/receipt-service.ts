@@ -5,9 +5,9 @@ import { Receipt } from "./receipt.model";
 @Injectable()
 export class ReceiptService {
     private products: Product[] = [
-        new Product('Ethernet cable',false, 1, 20, 3, false),
-        new Product('Headset',false, 2, 80, 4, false),
-        new Product('Imported Monitor',true, 3, 200, 5, false),
+        new Product('Ethernet cable',false, 20, 3, false),
+        new Product('Headset',false, 80, 4, false),
+        new Product('Imported Monitor',true, 200, 5, false),
     ];
     private receipts: Receipt[]= [
         

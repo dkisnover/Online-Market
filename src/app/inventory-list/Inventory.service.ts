@@ -5,14 +5,13 @@ import { Product } from "../shared/product.model";
 @Injectable()
 export class InventoryService{
     private inventoryProducts: Product[] = [
-        new Product('Ethernet cable',false, 1, 20, 0, false),
-        new Product('Headset',false, 2, 80, 0, false),
-        new Product('Imported Monitor',true, 3, 200, 0, false),
+        new Product('Ethernet cable',false, 20, 0, false),
+        new Product('Headset',false, 80, 0, false),
+        new Product('Imported Monitor',true, 200, 0, false),
     ];
-    private products$: Observable<Product[]> = of(this.inventoryProducts.slice());
     
     getProducts(){
-        return this.products$;
+        return this.inventoryProducts;
     }
 
     getProduct(index: number){
@@ -25,7 +24,6 @@ export class InventoryService{
 
     addProduct(product: Product){
         this.inventoryProducts.push(product);
-        this.products$ = of(this.inventoryProducts.slice());
         //this.products$.next(this.inventoryProducts.slice())
         console.log("nice");
     }
