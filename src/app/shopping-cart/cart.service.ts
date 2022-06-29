@@ -15,6 +15,13 @@ export class CartService{
     getProduct(index: number){
         return this.cartProducts[index];
     }
+    getTotalPrice(){
+        var price = 0;
+        for(var product of this.cartProducts){
+            price += product.totalPrice;
+        }
+        return price;
+    }
 
 
 }

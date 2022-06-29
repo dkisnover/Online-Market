@@ -10,10 +10,15 @@ import { CartService } from './cart.service';
 })
 export class ShoppingCartComponent implements OnInit {
   products: Product[];
+  totalPrice: number;
   constructor(private cartService: CartService) { }
 
   ngOnInit(): void {
     this.products = this.cartService.getProducts();
+  }
+
+  getSum(){
+    return this.cartService.getTotalPrice();
   }
 
 }

@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, ViewChild, EventEmitter} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Product } from 'src/app/product.model';
 import { InventoryService } from '../Inventory.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-inventory-add',
@@ -14,6 +15,9 @@ export class InventoryAddComponent implements OnInit {
   constructor(private inventoryService: InventoryService, private router: Router, private route: ActivatedRoute) { }
   product: Product;
 
+  @Output()
+  private inventoryChanged = new EventEmitter();
+
   ngOnInit(): void {
     
   }
@@ -24,6 +28,7 @@ export class InventoryAddComponent implements OnInit {
     this.inventoryService.addProduct(newProduct);
     form.reset;
     this.onCancel();
+    this.inventoryChanged.emit();
   }  
 
   onCancel(){

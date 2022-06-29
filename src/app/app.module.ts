@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { ReceiptTrackerComponent } from './receipt-tracker/receipt-tracker.component';
 import { ReceiptDisplayComponent } from './receipt-tracker/receipt-display/receipt-display.component';
 import { InventoryAddComponent } from './inventory-list/inventory-add/inventory-add.component';
+import { ReceiptChoiceComponent } from './receipt-tracker/receipt-choice/receipt-choice.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { InventoryAddComponent } from './inventory-list/inventory-add/inventory-
     CustomHeaderComponent,
     ReceiptTrackerComponent,
     ReceiptDisplayComponent,
-    InventoryAddComponent
+    InventoryAddComponent,
+    ReceiptChoiceComponent
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,8 @@
         <th scope="col">Name</th>
         <th scope="col">Price</th>
         <th scope="col">Quantity</th>
+        <th scope="col">total price</th>
+        <th scope="col">remove</th>
       </tr>
     </thead>
     <tbody>
@@ -16,6 +18,13 @@
         <td>{{product.name}}</td>
         <td>{{product.adjustedPrice | number:'1.2-2'}}</td>
         <td>{{product.quantity}}</td>
+        <td>{{product.totalPrice  | number:'1.2-2'}}</td>
+        <td><button type="button" class="btn btn-danger">Remove</button>
+        </td>
       </tr>
     </tbody>
   </table>
+  <h5 style="padding-top: 20px;"> Total Price: {{getSum() | number:'1.2-2'}}</h5>
+  <div style="padding-top: 20px;"></div>
+  <button type="button" class="btn btn-success" >Purchase</button>
+

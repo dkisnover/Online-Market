@@ -1,25 +1,35 @@
-<h3>Inventory</h3>
-<table class="table">
+<!--ng-container *ngIf="(products$ | async) as products" -->
+  <h3>Inventory</h3>
+  <table class="table">
     <thead>
       <tr>
         <th scope="col">#</th>
         <th scope="col">name</th>
         <th scope="col">price</th>
         <th scope="col">imported</th>
+        <th scope="col">quantity</th>
+        <th scope="col">submit</th>
       </tr>
-    </thead>
-    <tbody>
+    </thead >
+      <tbody (inventoryChanged)="reloadInventory()">
       <tr
-        *ngFor="let product of products; let i = index"
-      >
+        *ngFor="let product of products$ | async; let i = index"
+          >
         <th scope="row">{{i+1}}</th>
         <td>{{product.name}}</td>
         <td>{{product.unadjustedPrice | number:'1.2-2'}}</td>
         <td *ngIf="product.imported === true">yes</td>
         <td *ngIf="product.imported === false">no</td>
+        <td><input type="number"></td>
+        <td>
+          <button type="button" class="btn btn-warning">add to cart</button>
+        </td>
       </tr>
     </tbody>
+    
     <button type="button" class="btn btn-success" (click)="onAddActivate()">Add</button>
 
   </table>
   <router-outlet></router-outlet>
+<!--/ng-container-->
+

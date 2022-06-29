@@ -6,6 +6,7 @@ export class Product {
     public adjustedPrice: number;
     public quantity: number;
     public exempt: boolean;
+    public totalPrice: number;
 
     constructor( name: string,  imported: boolean,  id: number,  unadjustedPrice: number, quantity: number, exempt: boolean){
         this.name = name;
@@ -21,6 +22,7 @@ export class Product {
         this.adjustedPrice *= 100;
         this.adjustedPrice = Math.round(this.adjustedPrice / 5) * 5
         this.adjustedPrice /=100;
+        this.totalPrice = Math.round(this.adjustedPrice * quantity * 100)/100
     }
 
     setQuantity(q: number){
