@@ -1,1 +1,22 @@
-<p>receipt-display works!</p>
+<h3>Receipts</h3>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Date</th>
+        <th scope="col">Total Price</th>
+        <th scope="col">View Receipt</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let receipt of receipts; let i = index"
+      >
+        <th scope="row">{{i + 1}}</th>
+        <td>{{receipt.purchaseDate.getDay()}}/{{receipt.purchaseDate.getMonth()}}/{{receipt.purchaseDate.getFullYear()}}</td>
+        <td>{{receipt.totalCost | number:'1.2-2'}}</td>
+        <td> <button type="button" class="btn btn-info" [routerLink]="[i]">View</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

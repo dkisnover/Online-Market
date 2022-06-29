@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable} from 'rxjs';
-import { Product } from '../product.model';
+import { Product } from '../shared/product.model';
 import { InventoryService } from './Inventory.service';
 
 @Component({

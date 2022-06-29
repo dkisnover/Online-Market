@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
-import { Product } from "../product.model";
+import { Product } from "../shared/product.model";
 
 @Injectable()
 export class InventoryService{

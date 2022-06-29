@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ReceiptService } from 'src/app/shared/receipt-service';
+import { Receipt } from 'src/app/shared/receipt.model';
 
 @Component({
   selector: 'app-receipt-choice',
@@ -6,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./receipt-choice.component.css']
 })
 export class ReceiptChoiceComponent implements OnInit {
-
-  constructor() { }
+  receipt: Receipt;
+  constructor(private route: ActivatedRoute, private receiptService: ReceiptService) { }
 
   ngOnInit(): void {
+    this.receipt = this.receiptService.getReceipt(this.route.snapshot.params['id']);
+    console.log(this.receipt.totalCost);
   }
 
 }

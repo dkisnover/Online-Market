@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, ViewChild, EventEmitter} from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Product } from 'src/app/product.model';
+import { Product } from 'src/app/shared/product.model';
 import { InventoryService } from '../Inventory.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { tap } from 'rxjs';

@@ -1,12 +1,27 @@
+<h3>Receipt: {{receipt.purchaseDate.getDay()}}/{{receipt.purchaseDate.getMonth()}}/{{receipt.purchaseDate.getFullYear()}}   </h3>
 <table class="table">
-    <tbody>   
-        <tr>
-            <th>id</th>
-            <td>name</td>
-            <td>date</td>
-            <td>total cost</td>
-            <td><button type="button" class="btn btn-info">Info</button></td>
-        </tr>  
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">total price</th>
+        <th scope="col">remove</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let product of receipt.purchases; let i = index"
+      >
+        <th scope="row">{{i+ 1}}</th>
+        <td>{{product.name}}</td>
+        <td>{{product.adjustedPrice | number:'1.2-2'}}</td>
+        <td>{{product.quantity}}</td>
+        <td>{{product.totalPrice  | number:'1.2-2'}}</td>
+        <td><button type="button" class="btn btn-danger">Remove</button>
+        </td>
+      </tr>
     </tbody>
-</table>
-
+  </table>
+  <h5 style="padding-top: 20px;"> Total Price: {{receipt.totalCost| number:'1.2-2'}}</h5>

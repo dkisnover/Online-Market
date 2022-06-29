@@ -12,6 +12,7 @@ import { ReceiptTrackerComponent } from './receipt-tracker/receipt-tracker.compo
 import { ReceiptDisplayComponent } from './receipt-tracker/receipt-display/receipt-display.component';
 import { InventoryAddComponent } from './inventory-list/inventory-add/inventory-add.component';
 import { ReceiptChoiceComponent } from './receipt-tracker/receipt-choice/receipt-choice.component';
+import { ReceiptService } from './shared/receipt-service';
 
 @NgModule({
   declarations: [
@@ -30,8 +31,10 @@ import { ReceiptChoiceComponent } from './receipt-tracker/receipt-choice/receipt
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [ReceiptService],
   exports: [AppRoutingModule],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(private receiptService: ReceiptService){}
+}
