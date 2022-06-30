@@ -7,7 +7,6 @@
         <th scope="col">Price</th>
         <th scope="col">Quantity</th>
         <th scope="col">total price</th>
-        <th scope="col">remove</th>
       </tr>
     </thead>
     <tbody>
@@ -19,8 +18,6 @@
         <td>{{product.adjustedPrice | number:'1.2-2'}}</td>
         <td>{{product.quantity}}</td>
         <td>{{product.totalPrice  | number:'1.2-2'}}</td>
-        <td><button type="button" class="btn btn-danger">Remove</button>
-        </td>
       </tr>
     </tbody>
   </table>

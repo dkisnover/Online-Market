@@ -22,6 +22,25 @@ export class CartService{
         }
         return price;
     }
+    addProduct(newProduct: Product){
+        newProduct.adjustPrice();
+        if(this.cartProducts.length === 0 ){
+            this.cartProducts =[
+                newProduct
+            ];
+        }else{ 
+            this.cartProducts.push(newProduct);  
+        }
+
+    }
+
+    clear(){
+        this.cartProducts = [];
+    }
+
+    remove(index: number){
+        this.cartProducts.splice(index, 1);
+    }
 
 
 }

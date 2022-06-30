@@ -24,7 +24,6 @@ export class InventoryAddComponent implements OnInit {
 
   onSubmit(form: NgForm){
     const value = form.value;
-    console.log("name is : " + value.name);
     const newProduct = new Product(value.name, (value.imported) ? true : false, value.price, 0, (value.exempt) ? true : false)
     this.inventoryService.addProduct(newProduct);
     form.reset;

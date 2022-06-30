@@ -15,6 +15,10 @@ export class ShoppingCartComponent implements OnInit {
   constructor(private cartService: CartService, private receiptService: ReceiptService) { }
 
   ngOnInit(): void {
+    this.refreshProducts();
+  }
+
+  refreshProducts(){
     this.products = this.cartService.getProducts();
   }
 
@@ -23,10 +27,16 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   onPurchase(){
-    console.log("hello");
     this.receiptService.addReceipt(new Receipt(
       this.products, new Date(), 58
     ))
+    this.cartService.clear();
+    this.refreshProducts();
+  }
+
+  onRemove(index: number){
+    this.cartService.remove(index);
+    this.refreshProducts();
   }
 
 }

@@ -14,7 +14,6 @@ export class ReceiptChoiceComponent implements OnInit {
 
   ngOnInit(): void {
     this.receipt = this.receiptService.getReceipt(this.route.snapshot.params['id']);
-    console.log(this.receipt.totalCost);
   }
 
 }

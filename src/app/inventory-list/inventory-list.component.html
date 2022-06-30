@@ -14,9 +14,7 @@
     </thead >
       <tbody (inventoryChanged)="reloadInventory()">
         <form action=""></form>
-      <tr
-        *ngFor="let product of trial; let i = index"
-          >
+      <tr *ngFor="let product of trial; let i = index">
         <th scope="row">{{i+1}}</th>
         <td>{{product.name}}</td>
         <td>{{product.unadjustedPrice | number:'1.2-2'}}</td>
@@ -26,10 +24,10 @@
         <td *ngIf="product.exempt === true">yes</td>
         <td *ngIf="product.exempt === false">no</td>
           <td>
-            <input type="number" name="quantity" ngModel id="quantity">
+            <input type="number" name="quantity" ngModel id="quantity" [(ngModel)]="product.quantity">
           </td>
           <td>
-            <button type="button" class="btn btn-warning">add to cart</button>
+            <button type="button" class="btn btn-warning" (click)="onAddToCart(product)">add to cart</button>
           </td>
       </tr>
     </tbody>

@@ -25,7 +25,6 @@ export class InventoryService{
     addProduct(product: Product){
         this.inventoryProducts.push(product);
         //this.products$.next(this.inventoryProducts.slice())
-        console.log("nice");
     }
 
 

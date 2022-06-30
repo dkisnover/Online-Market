@@ -31,11 +31,15 @@ export class InventoryListComponent implements OnInit {
   }
 
   onAddActivate(){
-    console.log("hello");
     this.router.navigate(['add'], {relativeTo: this.route});
   }
 
-  onAddToCart(index: number){
+  onAddToCart(product: Product){
+    let tempProduct = new Product(product.name, product.imported, product.unadjustedPrice, product.quantity, product.exempt);
+    this.cartService.addProduct(tempProduct);
+    product.quantity = 0;
+    //product.quantity = 0;   
+    //this.cartService.
   }
 
 }

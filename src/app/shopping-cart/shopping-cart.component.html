@@ -19,7 +19,7 @@
         <td>{{product.adjustedPrice | number:'1.2-2'}}</td>
         <td>{{product.quantity}}</td>
         <td>{{product.totalPrice  | number:'1.2-2'}}</td>
-        <td><button type="button" class="btn btn-danger">Remove</button>
+        <td><button type="button" class="btn btn-danger" (click)="onRemove(i)">Remove</button>
         </td>
       </tr>
     </tbody>
