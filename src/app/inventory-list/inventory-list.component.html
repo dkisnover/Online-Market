@@ -1,4 +1,4 @@
-<!--ng-container *ngIf="(products$ | async) as products" -->
+
 <h3>Inventory</h3>
   <table class="table" >
     <thead>
@@ -13,7 +13,7 @@
         <th scope="col">Submit</th>
       </tr>
     </thead >
-      <tbody (inventoryChanged)="reloadInventory()">
+      <tbody>
         <form action=""></form>
       <tr *ngFor="let product of trial; let i = index">
         <th scope="row" style="border-right: 2px solid black;">{{i+1}}</th>
@@ -34,7 +34,7 @@
       </tr>
     </tbody>
   </table>
+  
   <button type="button" class="btn btn-success" (click)="onAddActivate()">Add</button>
-  <router-outlet></router-outlet>
-<!--/ng-container-->
+  <router-outlet  (activate)="newAdded($event)"></router-outlet>
 

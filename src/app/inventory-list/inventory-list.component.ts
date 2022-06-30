@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable} from 'rxjs';
 import { Product } from '../shared/product.model';
@@ -12,7 +12,6 @@ import { InventoryService } from '../shared/Inventory.service';
   providers: [],
 })
 export class InventoryListComponent implements OnInit {
-  products$: Observable<Product[]>;
   trial: Product[];
 
   constructor(private inventoryService: InventoryService,
@@ -25,9 +24,16 @@ export class InventoryListComponent implements OnInit {
     this.reloadInventory();
   }
 
+  newAdded(elementRef){
+    elementRef.inventoryChanged.subscribe( event => {
+      this.reloadInventory();
+    });
+  }
+
   reloadInventory(){
     console.log("reloaded");
     this.trial = this.inventoryService.getProducts();
+    console.log(this.trial);
   }
 
   onAddActivate(){
