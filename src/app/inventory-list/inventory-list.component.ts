@@ -3,14 +3,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable} from 'rxjs';
 import { Product } from '../shared/product.model';
 import { CartService } from '../shared/cart.service';
-import { InventoryService } from './Inventory.service';
+import { InventoryService } from '../shared/Inventory.service';
 
 @Component({
   selector: 'app-inventory-list',
   templateUrl: './inventory-list.component.html',
   styleUrls: ['./inventory-list.component.css'],
-  providers: [InventoryService],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  providers: [],
 })
 export class InventoryListComponent implements OnInit {
   products$: Observable<Product[]>;
@@ -27,6 +26,7 @@ export class InventoryListComponent implements OnInit {
   }
 
   reloadInventory(){
+    console.log("reloaded");
     this.trial = this.inventoryService.getProducts();
   }
 
@@ -34,12 +34,18 @@ export class InventoryListComponent implements OnInit {
     this.router.navigate(['add'], {relativeTo: this.route});
   }
 
-  onAddToCart(product: Product){
-    let tempProduct = new Product(product.name, product.imported, product.unadjustedPrice, product.quantity, product.exempt);
-    this.cartService.addProduct(tempProduct);
+  onAddToCart(product: Product, index: number){
+    if(product.quantity <= product.stock){
+      let tempProduct = new Product(product.name, product.imported, product.unadjustedPrice, product.quantity, product.exempt);
+      this.cartService.addProduct(tempProduct);
+      this.inventoryService.removeStock(product.quantity, index);
+      console.log(this.inventoryService.getProduct(index).stock);
+      if(this.inventoryService.getProduct(index).stock === 0){
+        this.inventoryService.removeProduct(index);
+      }
+    }
     product.quantity = 0;
-    //product.quantity = 0;   
-    //this.cartService.
+    this.reloadInventory();
   }
 
 }

@@ -7,15 +7,18 @@ export class Product {
     public quantity: number;
     public exempt: boolean;
     public totalPrice: number;
+    public stock?: number
 
-    constructor( name: string,  imported: boolean, unadjustedPrice: number, quantity: number, exempt: boolean){
+    constructor( name: string,  imported: boolean, unadjustedPrice: number, quantity: number, exempt: boolean, stock?: number){
         this.name = name;
         this.imported = imported;
         this.unadjustedPrice = unadjustedPrice;
         this.quantity = quantity;
         this.exempt = exempt;
         this.adjustPrice();
+        this.stock = stock;
     }
+
 
     setQuantity(q: number){
         this.quantity = q;

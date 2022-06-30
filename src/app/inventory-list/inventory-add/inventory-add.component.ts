@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, ViewChild, EventEmitter} from '@angular/core';
 import { NgForm, FormControl } from '@angular/forms';
 import { Product } from 'src/app/shared/product.model';
-import { InventoryService } from '../Inventory.service';
+import { InventoryService } from '../../shared/Inventory.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { tap } from 'rxjs';
 
@@ -24,11 +24,11 @@ export class InventoryAddComponent implements OnInit {
 
   onSubmit(form: NgForm){
     const value = form.value;
-    const newProduct = new Product(value.name, (value.imported) ? true : false, value.price, 0, (value.exempt) ? true : false)
+    const newProduct = new Product(value.name, (value.imported) ? true : false, value.price, 0, (value.exempt) ? true : false, value.stock)
     this.inventoryService.addProduct(newProduct);
     form.reset;
-    this.onCancel();
     this.inventoryChanged.emit();
+    this.onCancel();
   }  
 
   onCancel(){
