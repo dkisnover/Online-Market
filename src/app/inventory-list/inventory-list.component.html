@@ -26,15 +26,18 @@
         <td *ngIf="product.exempt === true">yes</td>
         <td *ngIf="product.exempt === false">no</td>
           <td>
-            <input type="number" name="quantity" ngModel id="quantity" [(ngModel)]="product.quantity">
+            <input type="number" name="quantity" ngModel id="quantity" [(ngModel)]="product.quantity" min="0" step="1" >
           </td>
           <td>
-            <button type="button" class="btn btn-warning" (click)="onAddToCart(product, i)">add to cart</button>
+            <button type="button" class="btn btn-warning" (click)="onAddToCart(product, i)" 
+            [disabled]="product.quantity <= 0 || product.quantity % 1 != 0">
+              add to cart
+            </button>
           </td>
       </tr>
     </tbody>
   </table>
-  
+
   <button type="button" class="btn btn-success" (click)="onAddActivate()">Add</button>
   <router-outlet  (activate)="newAdded($event)"></router-outlet>
 
