@@ -13,7 +13,7 @@
         *ngFor="let receipt of receipts; let i = index"
       >
         <th scope="row">{{i + 1}}</th>
-        <td>{{receipt.purchaseDate.getDay()}}/{{receipt.purchaseDate.getMonth()}}/{{receipt.purchaseDate.getFullYear()}}</td>
+        <td>{{receipt.purchaseDate.getMonth()}}/{{receipt.purchaseDate.getDate()}}/{{receipt.purchaseDate.getFullYear()}}</td>
         <td>${{receipt.totalCost | number:'1.2-2'}}</td>
         <td> <button type="button" class="btn btn-info" [routerLink]="[i]">View</button>
         </td>

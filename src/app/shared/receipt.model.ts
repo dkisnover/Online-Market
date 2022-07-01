@@ -8,7 +8,8 @@ export class Receipt{
     public totalTaxes: number;
     public totalTaxless: number;
     
-    constructor(products: Product[], purchaseDate: Date,){
+    constructor(products: Product[], purchaseDate: Date){
+        console.log("new info: " + purchaseDate);
         this.purchases = products.slice();
         this.purchaseDate = purchaseDate;
         this.totalCost = 0;

@@ -11,6 +11,7 @@ export class Product {
     public tax: number;
     public totalTax: number;
 
+
     constructor( name: string,  imported: boolean, unadjustedPrice: number, quantity: number, exempt: boolean, stock?: number){
         this.name = name.trim();
         this.imported = imported;

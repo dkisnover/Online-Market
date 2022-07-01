@@ -3,6 +3,8 @@ import { Product } from '../shared/product.model';
 import { ReceiptService } from '../shared/receipt-service';
 import { Receipt } from '../shared/receipt.model';
 import { CartService } from '../shared/cart.service';
+import * as dayjs from 'dayjs';
+
 
 @Component({
   selector: 'app-shopping-cart',
@@ -27,8 +29,10 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   onPurchase(){
+    let now = dayjs();
+    console.log("on purchase: " + now.year());
     this.receiptService.addReceipt(new Receipt(
-      this.products, new Date()
+      this.products, new Date(now.year(),now.month() + 1, now.date())
     ))
     this.cartService.clear();
     this.refreshProducts();

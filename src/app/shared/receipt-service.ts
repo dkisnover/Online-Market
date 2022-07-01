@@ -11,14 +11,15 @@ export class ReceiptService {
     ];
     private receipts: Receipt[]= [
         
-        new Receipt( this.products.slice(), new Date(2022, 6, 29, 8, 31, 26)),
-        new Receipt( this.products.slice(), new Date(2021, 5, 28, 7, 30, 25)),
-        new Receipt( this.products.slice(), new Date(2022, 4, 27, 6, 29, 24)),
+        new Receipt( this.products.slice(), new Date(2022, 5, 23)),
+        new Receipt( this.products.slice(), new Date(2021, 5, 28)),
+        new Receipt( this.products.slice(), new Date(2022, 4, 27)),
     ];
 
     constructor(){}
 
     addReceipt(newReceipt: Receipt){
+        console.log(newReceipt.purchaseDate);
         this.receipts.push(newReceipt);
     }
 
