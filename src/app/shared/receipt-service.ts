@@ -11,9 +11,9 @@ export class ReceiptService {
     ];
     private receipts: Receipt[]= [
         
-        new Receipt( this.products.slice(), new Date(2022, 6, 29, 8, 31, 26), 1),
-        new Receipt( this.products.slice(), new Date(2021, 5, 28, 7, 30, 25), 2),
-        new Receipt( this.products.slice(), new Date(2022, 4, 27, 6, 29, 24), 3),
+        new Receipt( this.products.slice(), new Date(2022, 6, 29, 8, 31, 26)),
+        new Receipt( this.products.slice(), new Date(2021, 5, 28, 7, 30, 25)),
+        new Receipt( this.products.slice(), new Date(2022, 4, 27, 6, 29, 24)),
     ];
 
     constructor(){}

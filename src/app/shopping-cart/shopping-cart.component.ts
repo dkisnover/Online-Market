@@ -28,7 +28,7 @@ export class ShoppingCartComponent implements OnInit {
 
   onPurchase(){
     this.receiptService.addReceipt(new Receipt(
-      this.products, new Date(), 58
+      this.products, new Date()
     ))
     this.cartService.clear();
     this.refreshProducts();
@@ -37,6 +37,12 @@ export class ShoppingCartComponent implements OnInit {
   onRemove(index: number){
     this.cartService.remove(index);
     this.refreshProducts();
+  }
+  getTaxes(){
+    return this.cartService.getTotalTax();
+  }
+  getTaxless(){
+    return this.getSum() - this.getTaxes();
   }
 
 }

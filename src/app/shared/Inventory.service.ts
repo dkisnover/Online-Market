@@ -22,8 +22,14 @@ export class InventoryService{
         return this.inventoryProducts.length;
     }
 
-    addProduct(product: Product){
-        this.inventoryProducts.push(product);
+    addProduct(newProduct: Product){
+        let index = this.inventoryProducts.findIndex(x => x.name.toLowerCase === newProduct.name.toLowerCase && x.tax + x.unadjustedPrice === newProduct.tax + newProduct.unadjustedPrice);
+        if(index > -1){
+            this.inventoryProducts[index].stock += newProduct.stock;
+            this.inventoryProducts[index].adjustPrice();
+        }else{
+            this.inventoryProducts.push(newProduct);  
+        }
         //this.products$.next(this.inventoryProducts.slice())
     }
 

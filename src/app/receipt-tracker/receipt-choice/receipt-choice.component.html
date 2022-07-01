@@ -5,6 +5,7 @@
         <th scope="col">#</th>
         <th scope="col">Name</th>
         <th scope="col">Price</th>
+        <th scope="col">Tax</th>
         <th scope="col">Quantity</th>
         <th scope="col">total price</th>
       </tr>
@@ -15,10 +16,13 @@
       >
         <th scope="row">{{i+ 1}}</th>
         <td>{{product.name}}</td>
-        <td>{{product.adjustedPrice | number:'1.2-2'}}</td>
+        <td>${{product.unadjustedPrice | number:'1.2-2'}}</td>
+        <td>${{product.tax | number:'1.2-2'}}</td>
         <td>{{product.quantity}}</td>
-        <td>{{product.totalPrice  | number:'1.2-2'}}</td>
+        <td>${{product.totalPrice  | number:'1.2-2'}}</td>
       </tr>
     </tbody>
   </table>
-  <h5 style="padding-top: 20px;"> Total Price: {{receipt.totalCost| number:'1.2-2'}}</h5>
+  <h6 style="padding-top: 10px;"> Items: ${{receipt.totalTaxless | number:'1.2-2'}}</h6>
+  <h6 style="padding-top: 5px;"> Tax: ${{receipt.totalTaxes | number:'1.2-2'}}</h6>
+  <h5 style="padding-top: 5px;"> Total Price: {{receipt.totalCost| number:'1.2-2'}}</h5>

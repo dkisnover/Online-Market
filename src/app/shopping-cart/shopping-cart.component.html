@@ -5,6 +5,7 @@
         <th scope="col">#</th>
         <th scope="col">Name</th>
         <th scope="col">Price</th>
+        <th scope="col">Tax</th>
         <th scope="col">Quantity</th>
         <th scope="col">total price</th>
         <th scope="col">remove</th>
@@ -16,15 +17,18 @@
       >
         <th scope="row">{{i+ 1}}</th>
         <td>{{product.name}}</td>
-        <td>{{product.adjustedPrice | number:'1.2-2'}}</td>
+        <td>${{product.unadjustedPrice | number:'1.2-2'}}</td>
+        <td>${{product.tax | number:'1.2-2'}}</td>
         <td>{{product.quantity}}</td>
-        <td>{{product.totalPrice  | number:'1.2-2'}}</td>
+        <td>${{product.totalPrice | number:'1.2-2'}}</td>
         <td><button type="button" class="btn btn-danger" (click)="onRemove(i)">Remove</button>
         </td>
       </tr>
     </tbody>
   </table>
-  <h5 style="padding-top: 20px;"> Total Price: {{getSum() | number:'1.2-2'}}</h5>
-  <div style="padding-top: 20px;"></div>
+  <h6 style="padding-top: 10px;"> Items: ${{getTaxless() | number:'1.2-2'}}</h6>
+  <h6 style="padding-top: 5px;"> Tax: ${{getTaxes() | number:'1.2-2'}}</h6>
+  <h5 style="padding-top: 5px;"> Total Price: ${{getSum() | number:'1.2-2'}}</h5>
+  <div style="padding-top: 10px;"></div>
   <button type="button" class="btn btn-success" (click)="onPurchase()">purchase</button>
 

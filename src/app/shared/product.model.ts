@@ -7,10 +7,12 @@ export class Product {
     public quantity: number;
     public exempt: boolean;
     public totalPrice: number;
-    public stock?: number
+    public stock?: number;
+    public tax: number;
+    public totalTax: number;
 
     constructor( name: string,  imported: boolean, unadjustedPrice: number, quantity: number, exempt: boolean, stock?: number){
-        this.name = name;
+        this.name = name.trim();
         this.imported = imported;
         this.unadjustedPrice = unadjustedPrice;
         this.quantity = quantity;
@@ -34,6 +36,8 @@ export class Product {
         this.adjustedPrice *= 100;
         this.adjustedPrice = Math.round(this.adjustedPrice / 5) * 5
         this.adjustedPrice /=100;
+        this.tax = this.adjustedPrice - this.unadjustedPrice;
         this.totalPrice = Math.round(this.adjustedPrice * this.quantity * 100)/100
+        this.totalTax = this.tax * this.quantity;
     }
 }
