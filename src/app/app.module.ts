@@ -32,7 +32,7 @@ import { InventoryService } from './shared/Inventory.service';
     RouterModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [ReceiptService, CartService, InventoryService],
   exports: [AppRoutingModule],
