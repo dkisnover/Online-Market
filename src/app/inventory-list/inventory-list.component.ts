@@ -4,6 +4,7 @@ import { Observable} from 'rxjs';
 import { Product } from '../shared/product.model';
 import { CartService } from '../shared/cart.service';
 import { InventoryService } from '../shared/Inventory.service';
+import { Item } from '../shared/item.model';
 
 @Component({
   selector: 'app-inventory-list',
@@ -12,7 +13,7 @@ import { InventoryService } from '../shared/Inventory.service';
   providers: [],
 })
 export class InventoryListComponent implements OnInit {
-  trial: Product[];
+  trial: Item[];
 
   constructor(private inventoryService: InventoryService,
               private router: Router,
@@ -32,7 +33,7 @@ export class InventoryListComponent implements OnInit {
 
   reloadInventory(){
     console.log("reloaded");
-    this.trial = this.inventoryService.getProducts();
+    this.trial = this.inventoryService.getItems();
     console.log(this.trial);
   }
 
@@ -45,9 +46,9 @@ export class InventoryListComponent implements OnInit {
       let tempProduct = new Product(product.name, product.imported, product.unadjustedPrice, product.quantity, product.exempt);
       this.cartService.addProduct(tempProduct);
       this.inventoryService.removeStock(product.quantity, index);
-      console.log(this.inventoryService.getProduct(index).stock);
-      if(this.inventoryService.getProduct(index).stock === 0){
-        this.inventoryService.removeProduct(index);
+      console.log(this.inventoryService.getItem(index).stock);
+      if(this.inventoryService.getItem(index).stock === 0){
+        this.inventoryService.removeItem(index);
       }
     }
     product.quantity = 0;

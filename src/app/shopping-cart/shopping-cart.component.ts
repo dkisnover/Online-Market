@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../shared/product.model';
 import { ReceiptService } from '../shared/receipt-service';
-import { Receipt } from '../shared/receipt.model';
 import { CartService } from '../shared/cart.service';
 import * as dayjs from 'dayjs';
+import { Item } from '../shared/item.model';
 
 
 @Component({
@@ -12,7 +11,7 @@ import * as dayjs from 'dayjs';
   styleUrls: ['./shopping-cart.component.css'],
 })
 export class ShoppingCartComponent implements OnInit {
-  products: Product[];
+  items: Item[];
   totalPrice: number;
   constructor(private cartService: CartService, private receiptService: ReceiptService) { }
 
@@ -21,7 +20,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   refreshProducts(){
-    this.products = this.cartService.getProducts();
+    this.items = this.cartService.getProducts();
   }
 
   getSum(){
@@ -29,11 +28,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   onPurchase(){
-    let now = dayjs();
-    console.log("on purchase: " + now.year());
-    this.receiptService.addReceipt(new Receipt(
-      this.products, new Date(now.year(),now.month() + 1, now.date())
-    ))
+    this.receiptService.addReceipt(this.cartService.createReceipt());
     this.cartService.clear();
     this.refreshProducts();
   }

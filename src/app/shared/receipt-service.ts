@@ -9,12 +9,13 @@ export class ReceiptService {
         new Product('Headset',false, 80, 4, false),
         new Product('Imported Monitor',true, 200, 5, false),
     ];
-    private receipts: Receipt[]= [
+    private receipts: Receipt[] = []
+    /*private receipts: Receipt[]= [
         
         new Receipt( this.products.slice(), new Date(2022, 5, 23)),
         new Receipt( this.products.slice(), new Date(2021, 5, 28)),
         new Receipt( this.products.slice(), new Date(2022, 4, 27)),
-    ];
+    ];*/
 
     constructor(){}
 
