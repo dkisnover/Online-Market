@@ -13,7 +13,7 @@ export class ReceiptChoiceComponent implements OnInit {
   constructor(private route: ActivatedRoute, private receiptService: ReceiptService) { }
 
   ngOnInit(): void {
-    //this.receipt = this.receiptService.getReceipt(this.route.snapshot.params['id']);
+    this.receipt = this.receiptService.getReceipt(this.route.snapshot.params['id']);
   }
 
 }

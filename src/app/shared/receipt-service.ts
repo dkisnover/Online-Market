@@ -12,6 +12,7 @@ export class ReceiptService {
         new Product('Headset',false, 80, 4, false),
         new Product('Imported Monitor',true, 200, 5, false),
     ];
+    private receipts: Receipt[];
     /*private receipts: Receipt[]= [
         
         new Receipt( this.products.slice(), new Date(2022, 5, 23)),
@@ -30,9 +31,12 @@ export class ReceiptService {
         return this.receipts.slice();
     }*/
 
-    /*getReceipt(id: number): Receipt{
+    getReceipt(id: number): Receipt{
         return this.receipts[id];
-    }*/
+    }
+    setReceipts(receipts: Receipt[]){
+        this.receipts = receipts;
+    }
 
     onSaveData(receipt: Receipt){
         this.http.post(
@@ -44,7 +48,7 @@ export class ReceiptService {
     onFetchReceipts() {
         return this.http
           .get<{ [key: string]: Receipt }>(
-            'https://online-store-9bdde-default-rtdb.firebaseio.com/inventory.json'
+            'https://online-store-9bdde-default-rtdb.firebaseio.com/receipts.json'
           )
           .pipe(
             map(responseData => {
@@ -52,6 +56,7 @@ export class ReceiptService {
               for (const key in responseData) {
                 if (responseData.hasOwnProperty(key)) {
                   postsArray.push({ ...responseData[key], id: key });
+                  postsArray[postsArray.length-1].purchaseDate = new Date(postsArray[postsArray.length-1].purchaseDate);
                 }
               }
               return postsArray;

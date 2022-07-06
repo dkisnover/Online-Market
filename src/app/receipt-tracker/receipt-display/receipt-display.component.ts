@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReceiptService } from 'src/app/shared/receipt-service';
@@ -11,7 +12,8 @@ import { Receipt } from 'src/app/shared/receipt.model';
 export class ReceiptDisplayComponent implements OnInit {
   constructor(private receiptService: ReceiptService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private http: HttpClient) { }
   receipts: Receipt[];
   isFetching = false;
 
@@ -20,6 +22,7 @@ export class ReceiptDisplayComponent implements OnInit {
     this.receiptService.onFetchReceipts().subscribe(posts =>{
       this.isFetching = false;
       this.receipts = posts;
+      this.receiptService.setReceipts(posts);
     });
   }
 
@@ -32,6 +35,7 @@ export class ReceiptDisplayComponent implements OnInit {
     this.receiptService.onFetchReceipts().subscribe(posts =>{
       this.isFetching = false;
       this.receipts = posts;
+      this.receiptService.setReceipts(posts);
     });
   }
 
