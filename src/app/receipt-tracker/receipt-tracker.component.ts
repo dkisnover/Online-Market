@@ -19,4 +19,6 @@ export class ReceiptTrackerComponent implements OnInit {
     this.router.navigate(['choice'], {relativeTo: this.route});
   }
 
+  
+
 }

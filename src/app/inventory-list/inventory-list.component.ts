@@ -1,7 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable} from 'rxjs';
-import { Product } from '../shared/product.model';
 import { CartService } from '../shared/cart.service';
 import { InventoryService } from '../shared/Inventory.service';
 import { Item } from '../shared/item.model';
@@ -36,8 +35,9 @@ export class InventoryListComponent implements OnInit {
 
   newAdded(elementRef){
     elementRef.inventoryChanged.subscribe( event => {
-      this.reloadInventory();
+      this.onFetchPosts();
     });
+    console.log("currently subscribed");
   }
 
   reloadInventory(){
@@ -48,7 +48,7 @@ export class InventoryListComponent implements OnInit {
     this.router.navigate(['add'], {relativeTo: this.route});
   }
 
-  onAddToCart(product: Product, index: number){
+  /*onAddToCart(product: Product, index: number){
     if(product.quantity <= product.stock){
       let tempProduct = new Product(product.name, product.imported, product.unadjustedPrice, product.quantity, product.exempt);
       this.cartService.addProduct(tempProduct);
@@ -60,6 +60,18 @@ export class InventoryListComponent implements OnInit {
     }
     product.quantity = 0;
     this.reloadInventory();
+  }*/
+
+  onAddToCart(item: Item, index: number){
+    if(item.quantity <= item.stock){
+      this.inventoryService.adjustPrice(item);
+      this.cartService.onSaveItem(item);
+      if(this.inventoryService.getProduct(index).stock === 0){
+        this.inventoryService.removeProduct(index);
+      }
+    }
+    item.quantity = 0;
+    this.onFetchPosts();
   }
 
   onFetchPosts(){

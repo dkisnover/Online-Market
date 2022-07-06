@@ -1,4 +1,3 @@
-<p>{{trial[0].name}}</p>
 <button class="btn btn-primary" (click)="onFetchPosts()"></button>
 
 <h3>Inventory</h3>
@@ -41,5 +40,5 @@
   </table>
 
   <button type="button" class="btn btn-success" (click)="onAddActivate()">Add</button>
-  <router-outlet  (activate)="newAdded($event)"></router-outlet>
+  <router-outlet  (activate)="onFetchPosts()"></router-outlet>
 

@@ -13,14 +13,26 @@ export class ReceiptDisplayComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute) { }
   receipts: Receipt[];
+  isFetching = false;
 
   ngOnInit(): void {
-    this.receipts = this.receiptService.getReceipts();
+    this.isFetching = true;
+    this.receiptService.onFetchReceipts().subscribe(posts =>{
+      this.isFetching = false;
+      this.receipts = posts;
+    });
   }
 
   onViewReceipt(index: number){
     this.router.navigate([index], {relativeTo: this.route});
 
+  }
+  onFetchPosts(){
+    this.isFetching = true;
+    this.receiptService.onFetchReceipts().subscribe(posts =>{
+      this.isFetching = false;
+      this.receipts = posts;
+    });
   }
 
 }

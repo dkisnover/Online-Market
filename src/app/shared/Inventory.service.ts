@@ -45,10 +45,10 @@ export class InventoryService{
         this.inventoryProducts[index].stock -= bought;
     }
 
-    onSaveData(){
+    onSaveData(item: Item){
         this.http.post(
             'https://online-store-9bdde-default-rtdb.firebaseio.com/inventory.json', 
-            this.inventoryProducts).subscribe(responseData=> { //this saves array, code was only made to track one addition at a time
+            item).subscribe(responseData=> { //this saves array, code was only made to track one addition at a time
                 console.log(responseData);
             });
     }
@@ -72,22 +72,18 @@ export class InventoryService{
               return postsArray;
             }));
       }
-
-    graftItem(product: Product, item: Item){
-        product.name = item.name;
-        console.log(product.name);
-        product.imported = item.imported;
-        product.unadjustedPrice = item.unadjustedPrice;
-        product.adjustedPrice = item.adjustedPrice;
-        product.quantity = item.quantity;
-        product.exempt = item.exempt;
-        product.totalPrice = item.totalPrice;
-        product.stock = item.stock;
-        product.tax = item.tax;
-        product.totalTax = item.totalTax;
-        product.id = item.id;
-        return product;
-        
+    
+    adjustPrice(item: Item){
+        if(item.imported === true){
+            item.adjustedPrice = 1.15 * item.unadjustedPrice;
+        }else{
+            item.adjustedPrice = item.exempt ? item.unadjustedPrice : item.unadjustedPrice * 1.1;
+        }
+        item.adjustedPrice *= 100;
+        item.adjustedPrice = Math.round(item.adjustedPrice / 5) * 5
+        item.adjustedPrice /=100;
+        item.tax = item.adjustedPrice - item.unadjustedPrice;
+        item.totalPrice = Math.round(item.adjustedPrice * item.quantity * 100)/100
+        item.totalTax = item.tax * item.quantity;
     }
-
 }
