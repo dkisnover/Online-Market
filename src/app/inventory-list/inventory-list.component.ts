@@ -4,6 +4,8 @@ import { Observable} from 'rxjs';
 import { Product } from '../shared/product.model';
 import { CartService } from '../shared/cart.service';
 import { InventoryService } from '../shared/Inventory.service';
+import { Item } from '../shared/item.model';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-inventory-list',
@@ -12,16 +14,24 @@ import { InventoryService } from '../shared/Inventory.service';
   providers: [],
 })
 export class InventoryListComponent implements OnInit {
-  trial: Product[];
+  trial: Item[];
+  isFetching = false;
 
   constructor(private inventoryService: InventoryService,
               private router: Router,
               private route: ActivatedRoute,
-              private cartService: CartService) { }
+              private cartService: CartService,
+              private http: HttpClient) { }
 
   ngOnInit(): void {
     //this.products$ = new Observable<Product[]>( productList => {this.inventoryService.getProducts()} );
-    this.reloadInventory();
+    //this.reloadInventory();
+    this.isFetching = true;
+    this.inventoryService.fetchPosts().subscribe(posts =>{
+      this.isFetching = false;
+      this.trial = posts;
+    });
+    //this.reloadInventory();
   }
 
   newAdded(elementRef){
@@ -32,8 +42,6 @@ export class InventoryListComponent implements OnInit {
 
   reloadInventory(){
     console.log("reloaded");
-    this.trial = this.inventoryService.getProducts();
-    console.log(this.trial);
   }
 
   onAddActivate(){
@@ -52,6 +60,19 @@ export class InventoryListComponent implements OnInit {
     }
     product.quantity = 0;
     this.reloadInventory();
+  }
+
+  onFetchPosts(){
+    this.isFetching = true;
+    this.inventoryService.fetchPosts().subscribe(posts =>{
+      this.isFetching = false;
+      this.trial = posts;
+      console.log(posts);
+      console.log(this.trial);
+    });
+    console.log(this.trial);
+    let i: Item = this.trial[0];
+    console.log(i);
   }
 
 }

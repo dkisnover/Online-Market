@@ -1,7 +1,8 @@
-export class Product {
+import { Item } from "./item.model";
+
+export class Product implements Item{
     public name: string;
     public imported: boolean;
-    public id: number;
     public unadjustedPrice: number;
     public adjustedPrice: number;
     public quantity: number;
@@ -10,19 +11,18 @@ export class Product {
     public stock?: number;
     public tax: number;
     public totalTax: number;
+    public id?: string;
 
+    constructor( name: string,  imported: boolean, unadjustedPrice: number, quantity: number, exempt: boolean, stock?: number, id?: string, item?: Item){
+            this.name = name.trim();
+            this.imported = imported;
+            this.unadjustedPrice = unadjustedPrice;
+            this.quantity = quantity;
+            this.exempt = exempt;
+            this.adjustPrice();
+            this.stock = stock;  
 
-    constructor( name: string,  imported: boolean, unadjustedPrice: number, quantity: number, exempt: boolean, stock?: number){
-        this.name = name.trim();
-        this.imported = imported;
-        this.unadjustedPrice = unadjustedPrice;
-        this.quantity = quantity;
-        this.exempt = exempt;
-        this.adjustPrice();
-        this.stock = stock;
     }
-
-
     setQuantity(q: number){
         this.quantity = q;
         this.adjustPrice();
@@ -41,4 +41,5 @@ export class Product {
         this.totalPrice = Math.round(this.adjustedPrice * this.quantity * 100)/100
         this.totalTax = this.tax * this.quantity;
     }
+
 }

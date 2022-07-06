@@ -1,6 +1,8 @@
+<p>{{trial[0].name}}</p>
+<button class="btn btn-primary" (click)="onFetchPosts()"></button>
 
 <h3>Inventory</h3>
-  <table class="table" >
+  <table class="table" *ngIf="!isFetching">
     <thead>
       <tr>
         <th scope="col" style="border-right: 2px solid black;">#</th>
@@ -13,9 +15,9 @@
         <th scope="col">Submit</th>
       </tr>
     </thead >
-      <tbody>
+      <tbody >
         <form action=""></form>
-      <tr *ngFor="let product of trial; let i = index">
+      <tr *ngFor="let product of trial; let i = index" >
         <th scope="row" style="border-right: 2px solid black;">{{i+1}}</th>
         <td>{{product.stock}}</td>
         <td>{{product.name}}</td>

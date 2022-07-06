@@ -1,15 +1,19 @@
 import { Injectable } from "@angular/core";
-import { Observable, of } from "rxjs";
+import { map, Observable, of } from "rxjs";
 import { Product } from "./product.model";
+import { HttpClient } from "@angular/common/http";
+import { Item } from "./item.model";
 
 @Injectable()
 export class InventoryService{
+    constructor(private http: HttpClient){}
+
     private inventoryProducts: Product[] = [
         new Product('Ethernet cable',false, 20, 0, false, 12),
         new Product('Headset',false, 80, 0, false, 2),
         new Product('Imported Monitor',true, 200, 0, false, 5),
     ];
-    
+    //private inventoryProducts: Product[] = null;
     getProducts(){
         return this.inventoryProducts.slice();
     }
@@ -41,5 +45,49 @@ export class InventoryService{
         this.inventoryProducts[index].stock -= bought;
     }
 
+    onSaveData(){
+        this.http.post(
+            'https://online-store-9bdde-default-rtdb.firebaseio.com/inventory.json', 
+            this.inventoryProducts).subscribe(responseData=> { //this saves array, code was only made to track one addition at a time
+                console.log(responseData);
+            });
+    }
+    onFetchPosts(){
+        this.fetchPosts();
+    }
+
+    fetchPosts() {
+        return this.http
+          .get<{ [key: string]: Item }>(
+            'https://online-store-9bdde-default-rtdb.firebaseio.com/inventory.json'
+          )
+          .pipe(
+            map(responseData => {
+              const postsArray: Item[] = [];
+              for (const key in responseData) {
+                if (responseData.hasOwnProperty(key)) {
+                  postsArray.push({ ...responseData[key], id: key });
+                }
+              }
+              return postsArray;
+            }));
+      }
+
+    graftItem(product: Product, item: Item){
+        product.name = item.name;
+        console.log(product.name);
+        product.imported = item.imported;
+        product.unadjustedPrice = item.unadjustedPrice;
+        product.adjustedPrice = item.adjustedPrice;
+        product.quantity = item.quantity;
+        product.exempt = item.exempt;
+        product.totalPrice = item.totalPrice;
+        product.stock = item.stock;
+        product.tax = item.tax;
+        product.totalTax = item.totalTax;
+        product.id = item.id;
+        return product;
+        
+    }
 
 }
