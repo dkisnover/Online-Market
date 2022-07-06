@@ -64,4 +64,7 @@ export class CartService{
                 console.log(responseData);
             });
     }
+    deleteItems(){
+        return this.http.delete('https://online-store-9bdde-default-rtdb.firebaseio.com/cart.json') 
+    }
 }

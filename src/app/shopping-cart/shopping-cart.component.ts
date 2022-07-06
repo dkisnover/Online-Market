@@ -40,6 +40,8 @@ export class ShoppingCartComponent implements OnInit {
       totalTaxless: this.getTaxless()
     }
     this.receiptService.onSaveData(receipt);
+    this.onClearCart();
+    this.onFetchPosts();
     
     /*console.log("on purchase: " + now.year());
     this.receiptService.addReceipt(new Receipt(
@@ -63,6 +65,12 @@ export class ShoppingCartComponent implements OnInit {
     this.cartService.onFetchItems().subscribe(posts =>{
       this.isFetching = false;
       this.products = posts;
+    });
+  }
+
+  onClearCart(){
+    this.cartService.deleteItems().subscribe(() =>{
+      this.products = [];
     });
   }
 }
