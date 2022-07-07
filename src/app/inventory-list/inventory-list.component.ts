@@ -1,10 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable} from 'rxjs';
-import { Product } from '../shared/product.model';
 import { CartService } from '../shared/cart.service';
 import { InventoryService } from '../shared/Inventory.service';
 import { Item } from '../shared/item.model';
+import { Observable } from "rxjs";
+
 
 @Component({
   selector: 'app-inventory-list',
@@ -14,45 +14,62 @@ import { Item } from '../shared/item.model';
 })
 export class InventoryListComponent implements OnInit {
   trial: Item[];
+  items$: Observable<Item[]>;
 
   constructor(private inventoryService: InventoryService,
               private router: Router,
               private route: ActivatedRoute,
-              private cartService: CartService) { }
+              private cartService: CartService,) { }
 
   ngOnInit(): void {
     //this.products$ = new Observable<Product[]>( productList => {this.inventoryService.getProducts()} );
+    console.log('ngonit hit');
     this.reloadInventory();
   }
 
   newAdded(elementRef){
     elementRef.inventoryChanged.subscribe( event => {
-      this.reloadInventory();
+      this.inventoryService.storeInventory();
     });
   }
 
   reloadInventory(){
     console.log("reloaded");
-    this.trial = this.inventoryService.getItems();
-    console.log(this.trial);
+    //console.log(this.inventoryService.getItems())
+    this.items$ = this.inventoryService.getItems();
+    //console.log('trial');
+    //console.log(this.trial);
+    //console.log('service');
+    //console.log(this.inventoryService.getItems());
   }
 
   onAddActivate(){
     this.router.navigate(['add'], {relativeTo: this.route});
   }
 
-  onAddToCart(product: Product, index: number){
-    if(product.quantity <= product.stock){
-      let tempProduct = new Product(product.name, product.imported, product.unadjustedPrice, product.quantity, product.exempt);
-      this.cartService.addProduct(tempProduct);
-      this.inventoryService.removeStock(product.quantity, index);
+  onAddToCart(item: Item, index: number){
+    if(item.quantity <= item.stock){
+      let tempItem: Item = {
+        name: item.name,
+        imported: item.imported,
+        unadjustedPrice: item.unadjustedPrice,
+        adjustedPrice: item.adjustedPrice,
+        quantity: item.quantity,
+        exempt: item.exempt,
+        totalPrice: item.totalPrice,
+        tax: item.tax,
+        totalTax: item.tax
+      }
+      this.inventoryService.adjustPrice(tempItem);
+      this.cartService.addItem(tempItem);
+      this.inventoryService.removeStock(item.quantity, index);
       console.log(this.inventoryService.getItem(index).stock);
       if(this.inventoryService.getItem(index).stock === 0){
         this.inventoryService.removeItem(index);
       }
     }
-    product.quantity = 0;
+    item.quantity = 0;
+    this.inventoryService.storeInventory();
     this.reloadInventory();
   }
-
 }

@@ -1,14 +1,8 @@
 import { Injectable } from "@angular/core";
-import { Product } from "./product.model";
 import { Receipt } from "./receipt.model";
 
 @Injectable()
 export class ReceiptService {
-    private products: Product[] = [
-        new Product('Ethernet cable',false, 20, 3, false),
-        new Product('Headset',false, 80, 4, false),
-        new Product('Imported Monitor',true, 200, 5, false),
-    ];
     private receipts: Receipt[] = []
     /*private receipts: Receipt[]= [
         

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ReceiptService } from '../shared/receipt-service';
 import { CartService } from '../shared/cart.service';
-import * as dayjs from 'dayjs';
 import { Item } from '../shared/item.model';
 
 
@@ -31,11 +30,13 @@ export class ShoppingCartComponent implements OnInit {
     this.receiptService.addReceipt(this.cartService.createReceipt());
     this.cartService.clear();
     this.refreshProducts();
+    this.cartService.storeInventory();
   }
 
   onRemove(index: number){
     this.cartService.remove(index);
     this.refreshProducts();
+    this.cartService.storeInventory();
   }
   getTaxes(){
     return this.cartService.getTotalTax();

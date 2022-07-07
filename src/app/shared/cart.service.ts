@@ -1,11 +1,13 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import * as dayjs from "dayjs";
+import { map, Observable } from "rxjs";
 import { Item } from "./item.model";
-import { Product } from "./product.model";
 import { Receipt } from "./receipt.model";
 
 @Injectable()
 export class CartService{
+    constructor(private http: HttpClient){}
     private cartItems: Item[] = []
     
     /*private cartProducts: Product[] = [
@@ -35,19 +37,19 @@ export class CartService{
         }
         return price;
     }
-    addProduct(newProduct: Product){
-        newProduct.adjustPrice();
+    addItem(newItem: Item){
+        this.adjustPrice(newItem);
         if(this.cartItems.length === 0 ){
             this.cartItems =[
-                newProduct
+                newItem
             ];
         }else{
-            let index = this.cartItems.findIndex(x => x.name.toLowerCase === newProduct.name.toLowerCase && x.tax + x.unadjustedPrice === newProduct.tax + newProduct.unadjustedPrice);
+            let index = this.cartItems.findIndex(x => x.name.toLowerCase === newItem.name.toLowerCase && x.tax + x.unadjustedPrice === newItem.tax + newItem.unadjustedPrice);
             if(index > -1){
-                this.cartItems[index].quantity += newProduct.quantity;
+                this.cartItems[index].quantity += newItem.quantity;
                 this.adjustPrice(this.cartItems[index]);
             }else{
-                this.cartItems.push(newProduct);  
+                this.cartItems.push(newItem);  
             }
         }
 
@@ -86,6 +88,20 @@ export class CartService{
 
         }
     }
+
+    storeInventory(){
+        this.http.put('https://online-store-9bdde-default-rtdb.firebaseio.com/inventory.json', this.cartItems).subscribe(response =>{
+            console.log(response);
+        })
+    }
+
+    fetchInventory(): Observable<Item[]>{
+        let temp;
+        console.log('fetch inventory hit')
+        return this.http.get<Item[]>('https://online-store-9bdde-default-rtdb.firebaseio.com/inventory.json')
+            .pipe(map(items => this.cartItems = items));
+    }
+
 
 
 }

@@ -1,8 +1,11 @@
+import { HttpClient } from "@angular/common/http";
+import { temporaryAllocator } from "@angular/compiler/src/render3/view/util";
 import { Injectable } from "@angular/core";
-import { Observable, of } from "rxjs";
+import { map, Observable, of } from "rxjs";
 import { Item } from "./item.model";
 @Injectable()
 export class InventoryService{
+    constructor(private http: HttpClient){}
     private inventoryItems: Item[] = [];
     /*private inventoryProducts: Product[] = [
         new Product('Ethernet cable',false, 20, 0, false, 12),
@@ -11,7 +14,7 @@ export class InventoryService{
     ];*/
     
     getItems(){
-        return this.inventoryItems.slice();
+        return this.fetchInventory();
     }
 
     getItem(index: number): Item{
@@ -22,15 +25,30 @@ export class InventoryService{
         return this.inventoryItems.length;
     }
 
-    addItem(newItem: Item){
-        let index = this.inventoryItems.findIndex(x => x.name.toLowerCase === newItem.name.toLowerCase && x.tax + x.unadjustedPrice === newItem.tax + newItem.unadjustedPrice);
-        if(index > -1){
-            this.inventoryItems[index].stock += newItem.stock;
-            this.adjustPrice(this.inventoryItems[index]);
-        }else{
-            this.inventoryItems.push(newItem);  
+    setItems(items: Item[]){
+        if(items){
+            console.log('didnt equal null');
+            console.log(items);
+            this.inventoryItems = items;
+            console.log(this.inventoryItems);
         }
-        //this.products$.next(this.inventoryProducts.slice())
+    }
+
+    addItem(newItem: Item){
+        if(this.inventoryItems){
+           let index = this.inventoryItems.findIndex(x => x.name.toLowerCase === newItem.name.toLowerCase && x.tax + x.unadjustedPrice === newItem.tax + newItem.unadjustedPrice);
+            if(index > -1){
+                this.inventoryItems[index].stock += newItem.stock;
+                this.adjustPrice(this.inventoryItems[index]);
+            }else{
+                this.inventoryItems.push(newItem);  
+            }
+            console.log(this.inventoryItems); 
+        }else{
+            this.inventoryItems = [newItem];
+            this.storeInventory();
+        }
+        
     }
 
     removeItem(index: number){
@@ -55,5 +73,17 @@ export class InventoryService{
         item.totalTax = item.tax * item.quantity;
     }
 
+    storeInventory(){
+        this.http.put('https://online-store-9bdde-default-rtdb.firebaseio.com/inventory.json', this.inventoryItems).subscribe(response =>{
+            console.log(response);
+        })
+    }
+
+    fetchInventory(): Observable<Item[]>{
+        let temp;
+        console.log('fetch inventory hit')
+        return this.http.get<Item[]>('https://online-store-9bdde-default-rtdb.firebaseio.com/inventory.json')
+            .pipe(map(items => items ? this.inventoryItems = items : this.inventoryItems = []));
+    }
 
 }

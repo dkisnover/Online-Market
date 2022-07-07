@@ -1,6 +1,5 @@
 import { Component, OnInit, Output, ViewChild, EventEmitter} from '@angular/core';
 import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
-import { Product } from 'src/app/shared/product.model';
 import { InventoryService } from '../../shared/Inventory.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Item } from 'src/app/shared/item.model';
@@ -29,6 +28,7 @@ export class InventoryAddComponent implements OnInit {
   }
 
   onSubmit(){
+    console.log(this.inventoryService.getItems());
     console.log("accessed");
     const value = this.addForm.value;
     //const newProduct = new Product(value.name, (value.imported) ? true : false, value.price, 0, (value.exempt) ? true : false, value.stock)

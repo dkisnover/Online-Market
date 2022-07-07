@@ -15,6 +15,7 @@ import { ReceiptChoiceComponent } from './receipt-tracker/receipt-choice/receipt
 import { ReceiptService } from './shared/receipt-service';
 import { CartService } from './shared/cart.service';
 import { InventoryService } from './shared/Inventory.service';
+import {HttpClientModule} from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { InventoryService } from './shared/Inventory.service';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [ReceiptService, CartService, InventoryService],
   exports: [AppRoutingModule],
