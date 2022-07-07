@@ -52,15 +52,19 @@ export class CartService{
                 this.cartItems.push(newItem);  
             }
         }
+        this.storeInventory();
+
 
     }
 
     clear(){
         this.cartItems = [];
+        this.storeInventory();
     }
 
     remove(index: number){
         this.cartItems.splice(index, 1);
+        this.storeInventory();
     }
 
     adjustPrice(item: Item){
@@ -90,16 +94,14 @@ export class CartService{
     }
 
     storeInventory(){
-        this.http.put('https://online-store-9bdde-default-rtdb.firebaseio.com/inventory.json', this.cartItems).subscribe(response =>{
+        this.http.put('https://online-store-9bdde-default-rtdb.firebaseio.com/cart.json', this.cartItems).subscribe(response =>{
             console.log(response);
         })
     }
 
     fetchInventory(): Observable<Item[]>{
-        let temp;
-        console.log('fetch inventory hit')
-        return this.http.get<Item[]>('https://online-store-9bdde-default-rtdb.firebaseio.com/inventory.json')
-            .pipe(map(items => this.cartItems = items));
+        return this.http.get<Item[]>('https://online-store-9bdde-default-rtdb.firebaseio.com/cart.json')
+            .pipe(map(items => items ? this.cartItems = items : this.cartItems = []));
     }
 
 

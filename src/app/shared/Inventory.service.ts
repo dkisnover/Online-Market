@@ -1,4 +1,5 @@
 import { HttpClient } from "@angular/common/http";
+import { identifierName } from "@angular/compiler";
 import { temporaryAllocator } from "@angular/compiler/src/render3/view/util";
 import { Injectable } from "@angular/core";
 import { map, Observable, of } from "rxjs";
@@ -27,10 +28,8 @@ export class InventoryService{
 
     setItems(items: Item[]){
         if(items){
-            console.log('didnt equal null');
-            console.log(items);
             this.inventoryItems = items;
-            console.log(this.inventoryItems);
+            this.storeInventory();
         }
     }
 
@@ -46,17 +45,23 @@ export class InventoryService{
             console.log(this.inventoryItems); 
         }else{
             this.inventoryItems = [newItem];
-            this.storeInventory();
         }
+        this.storeInventory();
         
     }
 
     removeItem(index: number){
-        this.inventoryItems.splice(index, 1);
+        if(this.inventoryItems.length === 1){
+            this.inventoryItems = [];
+        }else{
+            this.inventoryItems.splice(index, 1)
+        }
+        this.storeInventory();
     }
 
     removeStock(bought: number, index){
         this.inventoryItems[index].stock -= bought;
+        this.storeInventory();
     }
 
     adjustPrice(item: Item){

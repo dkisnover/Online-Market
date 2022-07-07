@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { ReceiptService } from 'src/app/shared/receipt-service';
 import { Receipt } from 'src/app/shared/receipt.model';
 
@@ -12,10 +13,10 @@ export class ReceiptDisplayComponent implements OnInit {
   constructor(private receiptService: ReceiptService,
               private router: Router,
               private route: ActivatedRoute) { }
-  receipts: Receipt[];
+  receipts$: Observable<Receipt[]>;
 
   ngOnInit(): void {
-    this.receipts = this.receiptService.getReceipts();
+    this.receipts$ = this.receiptService.fetchInventory();
   }
 
   onViewReceipt(index: number){

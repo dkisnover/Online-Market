@@ -1,4 +1,7 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { map, Observable } from "rxjs";
+import { Item } from "./item.model";
 import { Receipt } from "./receipt.model";
 
 @Injectable()
@@ -11,11 +14,11 @@ export class ReceiptService {
         new Receipt( this.products.slice(), new Date(2022, 4, 27)),
     ];*/
 
-    constructor(){}
+    constructor(private http: HttpClient){}
 
     addReceipt(newReceipt: Receipt){
-        console.log(newReceipt.purchaseDate);
         this.receipts.push(newReceipt);
+        this.storeInventory();
     }
 
     getReceipts(){
@@ -24,6 +27,17 @@ export class ReceiptService {
 
     getReceipt(id: number): Receipt{
         return this.receipts[id];
+    }
+    storeInventory(){
+        this.http.put('https://online-store-9bdde-default-rtdb.firebaseio.com/inventory.json', this.receipts).subscribe(response =>{
+            console.log(response);
+        })
+    }
+
+    fetchInventory(): Observable<Receipt[]>{
+        console.log('fetch inventory hit')
+        return this.http.get<Receipt[]>('https://online-store-9bdde-default-rtdb.firebaseio.com/inventory.json')
+            .pipe(map(receipts => receipts ? this.receipts = receipts : this.receipts = []));
     }
 
 

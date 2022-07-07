@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ReceiptService } from '../shared/receipt-service';
 import { CartService } from '../shared/cart.service';
 import { Item } from '../shared/item.model';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -10,7 +11,7 @@ import { Item } from '../shared/item.model';
   styleUrls: ['./shopping-cart.component.css'],
 })
 export class ShoppingCartComponent implements OnInit {
-  items: Item[];
+  items$: Observable<Item[]>;
   totalPrice: number;
   constructor(private cartService: CartService, private receiptService: ReceiptService) { }
 
@@ -19,7 +20,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   refreshProducts(){
-    this.items = this.cartService.getProducts();
+    this.items$ = this.cartService.fetchInventory();
   }
 
   getSum(){
@@ -29,13 +30,10 @@ export class ShoppingCartComponent implements OnInit {
   onPurchase(){
     this.receiptService.addReceipt(this.cartService.createReceipt());
     this.cartService.clear();
-    this.refreshProducts();
-    this.cartService.storeInventory();
   }
 
   onRemove(index: number){
     this.cartService.remove(index);
-    this.refreshProducts();
     this.cartService.storeInventory();
   }
   getTaxes(){

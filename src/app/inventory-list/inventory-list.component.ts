@@ -60,16 +60,14 @@ export class InventoryListComponent implements OnInit {
         tax: item.tax,
         totalTax: item.tax
       }
-      this.inventoryService.adjustPrice(tempItem);
+      item.quantity = 0;
       this.cartService.addItem(tempItem);
-      this.inventoryService.removeStock(item.quantity, index);
+      this.inventoryService.removeStock(tempItem.quantity, index);
+      this.inventoryService.adjustPrice(tempItem);
       console.log(this.inventoryService.getItem(index).stock);
       if(this.inventoryService.getItem(index).stock === 0){
         this.inventoryService.removeItem(index);
       }
     }
-    item.quantity = 0;
-    this.inventoryService.storeInventory();
-    this.reloadInventory();
   }
 }
