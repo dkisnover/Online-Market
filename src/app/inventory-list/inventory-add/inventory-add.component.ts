@@ -3,7 +3,13 @@ import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { InventoryService } from '../../shared/Inventory.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Item } from 'src/app/shared/item.model';
-
+/*
+@Author: Declan Kelly
+@params: N/A
+inventory-add component, iuses the addform FormGroup to create validators on the inputs. The only other functionality is the onSubmit method,
+called via a click listener which saves the information in inventoryService, clears the information, and then reroutes the program to the parent
+inventory-list. The other method, (check integer) is a validator.
+*/
 @Component({
   selector: 'app-inventory-add',
   templateUrl: './inventory-add.component.html',

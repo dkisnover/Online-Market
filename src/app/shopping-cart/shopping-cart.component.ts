@@ -4,7 +4,13 @@ import { CartService } from '../shared/cart.service';
 import { Item } from '../shared/item.model';
 import { Observable } from 'rxjs';
 
-
+/*
+@Author: Declan Kelly
+@params: N/A
+Displays Contents of cart as fetched from an http request in cartService. Also displays aggregate data such as the sum, the total taxes,
+and total cost. A purchase function is provided onClick of a purchase button, that creates a receipt that is stored in the backend via
+receiptService, then clears the cart. Items in Cart can be edited via a removal function.
+*/
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
@@ -12,14 +18,11 @@ import { Observable } from 'rxjs';
 })
 export class ShoppingCartComponent implements OnInit {
   items$: Observable<Item[]>;
-  totalPrice: number;
   constructor(private cartService: CartService, private receiptService: ReceiptService) { }
-
+  
   ngOnInit(): void {
     this.items$ = this.cartService.fetchCart();
   }
-
-
   getSum(){
     return this.cartService.getTotalPrice();
   }

@@ -1,3 +1,7 @@
+
+/*
+model representing items on the market
+*/
 export interface Item {
     name: string;
     imported: boolean;
