@@ -22,25 +22,13 @@ export class InventoryListComponent implements OnInit {
               private cartService: CartService,) { }
 
   ngOnInit(): void {
-    //this.products$ = new Observable<Product[]>( productList => {this.inventoryService.getProducts()} );
-    console.log('ngonit hit');
-    this.reloadInventory();
+    this.items$ = this.inventoryService.getItems();
   }
 
   newAdded(elementRef){
     elementRef.inventoryChanged.subscribe( event => {
       this.inventoryService.storeInventory();
     });
-  }
-
-  reloadInventory(){
-    console.log("reloaded");
-    //console.log(this.inventoryService.getItems())
-    this.items$ = this.inventoryService.getItems();
-    //console.log('trial');
-    //console.log(this.trial);
-    //console.log('service');
-    //console.log(this.inventoryService.getItems());
   }
 
   onAddActivate(){
@@ -64,7 +52,6 @@ export class InventoryListComponent implements OnInit {
       this.cartService.addItem(tempItem);
       this.inventoryService.removeStock(tempItem.quantity, index);
       this.inventoryService.adjustPrice(tempItem);
-      console.log(this.inventoryService.getItem(index).stock);
       if(this.inventoryService.getItem(index).stock === 0){
         this.inventoryService.removeItem(index);
       }

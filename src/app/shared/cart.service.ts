@@ -9,19 +9,7 @@ import { Receipt } from "./receipt.model";
 export class CartService{
     constructor(private http: HttpClient){}
     private cartItems: Item[] = []
-    
-    /*private cartProducts: Product[] = [
-        new Product('Ethernet cable',false, 20, 3, false),
-        new Product('Headset',false, 80, 6, false),
-        new Product('Imported Monitor',true, 34, 9, false),
-    ];*/
 
-    getProducts(){
-        return this.cartItems.slice();
-    }
-    getProduct(index: number){
-        return this.cartItems[index];
-    }
     getTotalPrice(){
         var price = 0;
         for(var product of this.cartItems){
@@ -52,7 +40,7 @@ export class CartService{
                 this.cartItems.push(newItem);  
             }
         }
-        this.storeInventory();
+        this.storeCart();
 
 
     }
@@ -60,12 +48,12 @@ export class CartService{
     clear(){
         this.cartItems.splice(0, this.cartItems.length-1);
         this.cartItems.pop();
-        this.storeInventory();
+        this.storeCart();
     }
 
     remove(index: number){
         this.cartItems.splice(index, 1);
-        this.storeInventory();
+        this.storeCart();
     }
 
     adjustPrice(item: Item){
@@ -94,13 +82,12 @@ export class CartService{
         }
     }
 
-    storeInventory(){
+    storeCart(){
         this.http.put('https://online-store-9bdde-default-rtdb.firebaseio.com/cart.json', this.cartItems).subscribe(response =>{
-            console.log(response);
         })
     }
 
-    fetchInventory(): Observable<Item[]>{
+    fetchCart(): Observable<Item[]>{
         return this.http.get<Item[]>('https://online-store-9bdde-default-rtdb.firebaseio.com/cart.json')
             .pipe(map(items => items ? this.cartItems = items : this.cartItems = []));
     }

@@ -16,12 +16,9 @@ export class ShoppingCartComponent implements OnInit {
   constructor(private cartService: CartService, private receiptService: ReceiptService) { }
 
   ngOnInit(): void {
-    this.refreshProducts();
+    this.items$ = this.cartService.fetchCart();
   }
 
-  refreshProducts(){
-    this.items$ = this.cartService.fetchInventory();
-  }
 
   getSum(){
     return this.cartService.getTotalPrice();
@@ -34,7 +31,7 @@ export class ShoppingCartComponent implements OnInit {
 
   onRemove(index: number){
     this.cartService.remove(index);
-    this.cartService.storeInventory();
+    this.cartService.storeCart();
   }
   getTaxes(){
     return this.cartService.getTotalTax();

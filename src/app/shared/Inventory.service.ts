@@ -34,6 +34,8 @@ export class InventoryService{
     }
 
     addItem(newItem: Item){
+        newItem.name = newItem.name.toLowerCase();
+        newItem.name = newItem.name.charAt(0).toUpperCase() + newItem.name.slice(1);
         if(this.inventoryItems){
            let index = this.inventoryItems.findIndex(x => x.name.toLowerCase === newItem.name.toLowerCase && x.tax + x.unadjustedPrice === newItem.tax + newItem.unadjustedPrice);
             if(index > -1){
@@ -42,7 +44,6 @@ export class InventoryService{
             }else{
                 this.inventoryItems.push(newItem);  
             }
-            console.log(this.inventoryItems); 
         }else{
             this.inventoryItems = [newItem];
         }
@@ -80,13 +81,11 @@ export class InventoryService{
 
     storeInventory(){
         this.http.put('https://online-store-9bdde-default-rtdb.firebaseio.com/inventory.json', this.inventoryItems).subscribe(response =>{
-            console.log(response);
         })
     }
 
     fetchInventory(): Observable<Item[]>{
         let temp;
-        console.log('fetch inventory hit')
         return this.http.get<Item[]>('https://online-store-9bdde-default-rtdb.firebaseio.com/inventory.json')
             .pipe(map(items => items ? this.inventoryItems = items : this.inventoryItems = []));
     }

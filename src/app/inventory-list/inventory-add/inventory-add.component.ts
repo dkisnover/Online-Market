@@ -28,8 +28,6 @@ export class InventoryAddComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.inventoryService.getItems());
-    console.log("accessed");
     const value = this.addForm.value;
     //const newProduct = new Product(value.name, (value.imported) ? true : false, value.price, 0, (value.exempt) ? true : false, value.stock)
     const newItem: Item = {
@@ -54,7 +52,6 @@ export class InventoryAddComponent implements OnInit {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
   checkInteger(control: FormControl): {[s: string]: boolean} {
-    console.log(control.value);
     if(!Number.isInteger(control.value)){
       return {'numberIsInteger': true}
     }

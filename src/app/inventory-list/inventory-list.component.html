@@ -8,7 +8,7 @@
         <th scope="col">Name</th>
         <th scope="col">Price</th>
         <th scope="col">Imported</th>
-        <th scope="col">Tax exempt</th>
+        <th scope="col">Tax Exempt</th>
         <th scope="col">Quantity</th>
         <th scope="col">Submit</th>
       </tr>
@@ -19,18 +19,18 @@
         <td>{{product.stock}}</td>
         <td>{{product.name}}</td>
         <td>${{product.unadjustedPrice | number:'1.2-2'}}</td>
-        <td *ngIf="product.imported === true">yes</td>
-        <td *ngIf="product.imported === false">no</td>
+        <td *ngIf="product.imported === true">Yes</td>
+        <td *ngIf="product.imported === false">No</td>
         
-        <td *ngIf="product.exempt === true">yes</td>
-        <td *ngIf="product.exempt === false">no</td>
+        <td *ngIf="product.exempt === true">Yes</td>
+        <td *ngIf="product.exempt === false">No</td>
           <td>
             <input type="number" name="quantity" ngModel id="quantity" [(ngModel)]="product.quantity" min="0" step="1" >
           </td>
           <td>
             <button type="button" class="btn btn-warning" (click)="onAddToCart(product, i)" 
             [disabled]="product.quantity <= 0 || product.quantity % 1 != 0">
-              add to cart
+              Add To Cart
             </button>
           </td>
       </tr>

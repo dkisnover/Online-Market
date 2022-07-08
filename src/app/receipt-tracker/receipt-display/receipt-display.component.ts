@@ -16,7 +16,7 @@ export class ReceiptDisplayComponent implements OnInit {
   receipts$: Observable<Receipt[]>;
 
   ngOnInit(): void {
-    this.receipts$ = this.receiptService.fetchInventory();
+    this.receipts$ = this.receiptService.fetchReceipts();
   }
 
   onViewReceipt(index: number){
