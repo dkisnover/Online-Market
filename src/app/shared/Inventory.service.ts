@@ -52,7 +52,7 @@ export class InventoryService{
 
     removeItem(index: number){
         if(this.inventoryItems.length === 1){
-            this.inventoryItems = [];
+            this.inventoryItems.pop();
         }else{
             this.inventoryItems.splice(index, 1)
         }

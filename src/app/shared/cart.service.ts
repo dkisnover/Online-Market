@@ -58,7 +58,8 @@ export class CartService{
     }
 
     clear(){
-        this.cartItems = [];
+        this.cartItems.splice(0, this.cartItems.length-1);
+        this.cartItems.pop();
         this.storeInventory();
     }
 

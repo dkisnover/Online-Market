@@ -29,15 +29,21 @@ export class ReceiptService {
         return this.receipts[id];
     }
     storeInventory(){
-        this.http.put('https://online-store-9bdde-default-rtdb.firebaseio.com/inventory.json', this.receipts).subscribe(response =>{
+        this.http.put('https://online-store-9bdde-default-rtdb.firebaseio.com/receipts.json', this.receipts).subscribe(response =>{
             console.log(response);
         })
     }
 
     fetchInventory(): Observable<Receipt[]>{
         console.log('fetch inventory hit')
-        return this.http.get<Receipt[]>('https://online-store-9bdde-default-rtdb.firebaseio.com/inventory.json')
-            .pipe(map(receipts => receipts ? this.receipts = receipts : this.receipts = []));
+        return this.http.get<Receipt[]>('https://online-store-9bdde-default-rtdb.firebaseio.com/receipts.json')
+            .pipe(map(receipts => {
+                receipts ? this.receipts = receipts : this.receipts = [];
+                this.receipts.forEach(x => {
+                    x.purchaseDate = new Date(x.purchaseDate);
+                });
+                return this.receipts;
+            }))
     }
 
 
