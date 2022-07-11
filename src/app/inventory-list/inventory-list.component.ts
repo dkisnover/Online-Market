@@ -63,5 +63,6 @@ export class InventoryListComponent implements OnInit {
         this.inventoryService.removeItem(index);
       }
     }
+    this.inventoryService.storeInventory();
   }
 }

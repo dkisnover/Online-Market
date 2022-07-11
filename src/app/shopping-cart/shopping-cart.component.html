@@ -1,4 +1,4 @@
-<h3>Shopping Cart</h3>
+<h1>Shopping Cart</h1>
 <table class="table">
     <thead>
       <tr>
@@ -26,9 +26,9 @@
       </tr>
     </tbody>
   </table>
-  <h6 style="padding-top: 10px;"> Items: ${{getTaxless() | number:'1.2-2'}}</h6>
-  <h6 style="padding-top: 5px;"> Tax: ${{getTaxes() | number:'1.2-2'}}</h6>
-  <h5 style="padding-top: 5px;"> Total Price: ${{getSum() | number:'1.2-2'}}</h5>
+  <h3 style="padding-top: 10px;"> Items: ${{getTaxless() | number:'1.2-2'}}</h3>
+  <h3 style="padding-top: 5px;"> Tax: ${{getTaxes() | number:'1.2-2'}}</h3>
+  <h2 style="padding-top: 5px;"> Total Price: ${{getSum() | number:'1.2-2'}}</h2>
   <div style="padding-top: 10px;"></div>
   <button type="button" class="btn btn-success" (click)="onPurchase()">Purchase</button>
 

@@ -16,7 +16,7 @@ import { ReceiptService } from './shared/receipt-service';
 import { CartService } from './shared/cart.service';
 import { InventoryService } from './shared/Inventory.service';
 import {HttpClientModule} from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatDialog} from '@angular/material/dialog'
 
 @NgModule({
   declarations: [
@@ -27,7 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReceiptTrackerComponent,
     ReceiptDisplayComponent,
     InventoryAddComponent,
-    ReceiptChoiceComponent
+    ReceiptChoiceComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,8 +35,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule
+    HttpClientModule
   ],
   providers: [ReceiptService, CartService, InventoryService],
   exports: [AppRoutingModule],

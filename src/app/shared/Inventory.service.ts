@@ -64,7 +64,6 @@ export class InventoryService{
     */
     removeStock(bought: number, index){
         this.inventoryItems[index].stock -= bought;
-        this.storeInventory();
     }
 
      /*

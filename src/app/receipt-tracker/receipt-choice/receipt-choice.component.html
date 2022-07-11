@@ -1,4 +1,4 @@
-<h3>Receipt: {{receipt.purchaseDate.getDate()}}/{{receipt.purchaseDate.getMonth()}}/{{receipt.purchaseDate.getFullYear()}}   </h3>
+<h1>Receipt: {{receipt.purchaseDate.getDate()}}/{{receipt.purchaseDate.getMonth()}}/{{receipt.purchaseDate.getFullYear()}} </h1>
 <table class="table">
     <thead>
       <tr>
@@ -23,6 +23,6 @@
       </tr>
     </tbody>
   </table>
-  <h6 style="padding-top: 10px;"> Items: ${{receipt.totalTaxless | number:'1.2-2'}}</h6>
-  <h6 style="padding-top: 5px;"> Tax: ${{receipt.totalTaxes | number:'1.2-2'}}</h6>
-  <h5 style="padding-top: 5px;"> Total Price: {{receipt.totalCost| number:'1.2-2'}}</h5>
+  <h3 style="padding-top: 10px;"> Items: ${{receipt.totalTaxless | number:'1.2-2'}}</h3>
+  <h3 style="padding-top: 5px;"> Tax: ${{receipt.totalTaxes | number:'1.2-2'}}</h3>
+  <h2 style="padding-top: 5px;"> Total Price: {{receipt.totalCost| number:'1.2-2'}}</h2>
