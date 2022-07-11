@@ -16,6 +16,7 @@ import { ReceiptService } from './shared/receipt-service';
 import { CartService } from './shared/cart.service';
 import { InventoryService } from './shared/Inventory.service';
 import {HttpClientModule} from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {HttpClientModule} from '@angular/common/http';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [ReceiptService, CartService, InventoryService],
   exports: [AppRoutingModule],
