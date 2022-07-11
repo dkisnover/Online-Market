@@ -59,9 +59,6 @@ export class InventoryListComponent implements OnInit {
       this.cartService.addItem(tempItem);
       this.inventoryService.removeStock(tempItem.quantity, index);
       this.inventoryService.adjustPrice(tempItem);
-      if(this.inventoryService.getItem(index).stock === 0){
-        this.inventoryService.removeItem(index);
-      }
     }
     this.inventoryService.storeInventory();
   }
