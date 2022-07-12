@@ -105,4 +105,13 @@ export class InventoryService{
             .pipe(map(items => items ? this.inventoryItems = items : this.inventoryItems = []));
     }
 
+    restoreInventory(item: Item){
+        let index = this.inventoryItems.findIndex(x => x.name.toLowerCase === item.name.toLowerCase && x.tax + x.unadjustedPrice === item.tax + item.unadjustedPrice);
+        if(index > -1){
+            this.inventoryItems[index].stock += item.stock;
+            this.adjustPrice(this.inventoryItems[index]);
+        }
+        this.storeInventory();
+    }
+
 }

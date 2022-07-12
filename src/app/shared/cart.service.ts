@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import * as dayjs from "dayjs";
 import { map, Observable } from "rxjs";
+import { InventoryService } from "./Inventory.service";
 import { Item } from "./item.model";
 import { Receipt } from "./receipt.model";
 
@@ -12,7 +13,7 @@ from the backend and making it accessible to components that need it
 */
 @Injectable()
 export class CartService{
-    constructor(private http: HttpClient){}
+    constructor(private http: HttpClient, private inventoryService: InventoryService){}
     private cartItems: Item[] = []
 
     /*
@@ -79,8 +80,12 @@ export class CartService{
         removes item from array, saves information
     */
     remove(index: number){
+        let item: Item = this.cartItems[index];
+        item.stock = item.quantity;
+        item.quantity = 0;
         this.cartItems.splice(index, 1);
         this.storeCart();
+        this.inventoryService.restoreInventory(item);
     }
     /*
     params: item: Item
