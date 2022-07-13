@@ -1,16 +1,16 @@
 
-<h1>Inventory</h1>
+<h1 data-cy="inventory-table-head">Inventory</h1>
   <table class="table" >
     <thead>
       <tr>
-        <th scope="col" style="border-right: 2px solid black;">#</th>
-        <th scope="col">Stock</th>
-        <th scope="col">Name</th>
-        <th scope="col">Price</th>
-        <th scope="col">Imported</th>
-        <th scope="col">Tax Exempt</th>
-        <th scope="col">Quantity</th>
-        <th scope="col">Submit</th>
+        <th scope="col" style="border-right: 2px solid black;" data-cy="inventory-table-number">#</th>
+        <th scope="col" data-cy="inventory-table-stock">Stock</th>
+        <th scope="col" data-cy="inventory-table-name">Name</th>
+        <th scope="col" data-cy="inventory-table-price">Price</th>
+        <th scope="col" data-cy="inventory-table-imported">Imported</th>
+        <th scope="col" data-cy="inventory-table-tax">Tax Exempt</th>
+        <th scope="col" data-cy="inventory-table-quantity">Quantity</th>
+        <th scope="col" data-cy="inventory-table-submit">Submit</th>
       </tr>
     </thead >
       <tbody>
@@ -41,6 +41,6 @@
     </tbody>
   </table>
 
-  <button type="button" class="btn btn-success" (click)="onAddActivate()">Add</button>
+  <button type="button" class="btn btn-success" (click)="onAddActivate()" data-cy="inventory-add-button">Add</button>
   <router-outlet  (activate)="newAdded($event)"></router-outlet>
 

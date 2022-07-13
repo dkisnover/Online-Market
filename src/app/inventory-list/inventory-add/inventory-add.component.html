@@ -1,40 +1,36 @@
 <form (ngSubmit)="onSubmit()" [formGroup] = "addForm">
     <div class="form-row align-items-center">
       <div class="col-auto">
-        <label class="sr-only" for="inlineFormInput">Name</label>
+        <label class="sr-only" for="inlineFormInput" data-cy="add-name">Name</label>
         <input type="text" class="form-control mb-2" id="name" formControlName="name" placeholder="Apples">
         <span *ngIf="!addForm.get('name').valid && addForm.get('name').touched" class="input-reminder"> please enter valid name</span>
       </div>
       <div class="col-auto">
-        <label class="sr-only" for="inlineFormInput">Price</label>
+        <label class="sr-only" for="inlineFormInput" data-cy="add-price">Price</label>
         <input type="number" min="0" step="any" class="form-control mb-2" id="price" formControlName="price" placeholder="10.99">
       </div>
       <span *ngIf="!addForm.get('price').valid && addForm.get('price').touched" class="input-reminder"> please enter valid price</span>
       <div class="col-auto">
-        <label class="sr-only" for="inlineFormInput">Stock</label>
+        <label class="sr-only" for="inlineFormInput" data-cy="add-stock">Stock</label>
         <input type="number" min="0" step="any" class="form-control mb-2" id="stock"  formControlName="stock" placeholder="0">
         <span *ngIf="!addForm.get('stock').valid && addForm.get('stock').touched" class="input-reminder"> please enter valid number</span>
       </div>
       <div class="col-auto">
         <div class="form-check mb-2">
           <input class="form-check-input" type="checkbox" formControlName="imported" id="imported">
-          <label class="form-check-label" for="autoSizingCheck">
-            Imported
-          </label>
+          <label class="form-check-label" data-cy="add-imported">Imported</label>
         </div>
       </div>
       <div class="col-auto">
         <div class="form-check mb-2">
           <input class="form-check-input" type="checkbox" id="exempt" formControlName="exempt" name="exempt">
-          <label class="form-check-label" for="autoSizingCheck">
-            Tax Exempt
-          </label>
+          <label class="form-check-label" data-cy="add-tax">Tax Exempt</label>
         </div>
       </div>
       <span *ngIf="!addForm.valid && addForm.touched" class="input-reminder"> please enter valid data</span>
       <div class="col-auto">
-        <button type="submit" class="btn btn-primary mb-2" [disabled]="!addForm.valid" >Submit</button> | 
-        <button type="button" class="btn btn-danger mb-2" (click)="onCancel()" >cancel</button>
+        <button type="submit" class="btn btn-primary mb-2" [disabled]="!addForm.valid" data-cy="add-submit">Submit</button> | 
+        <button type="button" class="btn btn-danger mb-2" data-cy="add-cancel" (click)="onCancel()">cancel</button>
       </div>
     </div>
   </form>
